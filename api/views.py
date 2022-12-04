@@ -9,3 +9,10 @@ def getData(request):
     serializer = ActivitySerializer(activities, many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+def addActivity(request):
+    serializer = ActivitySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
